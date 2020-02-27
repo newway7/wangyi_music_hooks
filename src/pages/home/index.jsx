@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useEffect,useState } from 'react';
 import axios from 'axios';
 
 import './style.scss';
@@ -7,37 +7,34 @@ import HomeCarousel from '../../components/home/homeCarousel/index';
 import HomeOption from '../../components/home/homeOption/index';
 import HomeSongList from '../../components/home/homeSongList/index';
 
-export default class Home extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            songList: []
-        };
-    }
 
-    getSongListData() {
+
+const Home=()=>{
+   let [songList,setSongList]=useState([]);
+
+useEffect(()=>{
+   let getSongListData=()=> {
         axios.get('/personalized')
              .then(res => {
-                 this.setState({
-                     songList: res.data.result
+                 
+                setSongList(res.data.result)
                  });
-             })
+             
     }
-    
-    componentWillMount() {
-        this.getSongListData();
-    }
-    
-    render() {
-        return (
-            <div className='home-wrap'>
-                <HomeHeader/>
-                <div className="carousel-bg"></div>
-                <HomeCarousel/>
-                <HomeOption/>
-                <h3>推荐歌单</h3>
-                <HomeSongList songList={this.state.songList}/>
-            </div>
-        );
-    }
+    getSongListData();
+},[])
+
+return (
+    <div className='home-wrap'>
+        <HomeHeader/>
+        <div className="carousel-bg"></div>
+        <HomeCarousel/>
+        <HomeOption/>
+        <h3>推荐歌单</h3>
+        <HomeSongList songList={songList}/>
+    </div>
+);
+
 }
+
+export default Home ;

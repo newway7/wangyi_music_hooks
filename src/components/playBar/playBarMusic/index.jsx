@@ -2,12 +2,18 @@ import React, { Component } from 'react'
 
 import './style.scss';
 
-export default class PlayBarMusic extends Component {
-    render() {
-        return (
-            <div className='playing-music'>
-                <audio src={'https://music.163.com/song/media/outer/url?id='+this.props.id+'.mp3'} autoPlay ref={this.props.musicNode}></audio>
-            </div>
-        );
-    }
-}
+const PlayBarMusic=React.forwardRef((props,ref)=>{
+    let {id}=props;
+    return (
+        <div className='playing-music'>
+            <audio src={'https://music.163.com/song/media/outer/url?id='+id+'.mp3'} autoPlay ref={ref}></audio>
+        </div>
+    );
+})
+
+
+
+
+
+
+export default  PlayBarMusic; 

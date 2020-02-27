@@ -10,44 +10,36 @@ const DiscoverProgress = props => {
   let playingPro = useRef();
   let dot = useRef();
 
-
-
-
-
   useEffect(() => {
-
     let progressLeft = progress.current.offsetLeft;
     let progressW = progress.current.offsetWidth - dot.current.offsetWidth;
     let playingProW;
 
     let progressOntouchstart = function(e) {
-        let clickX = e.changedTouches[0].pageX - progressLeft;
-        controlMusicProgress(progressW, clickX);
-        playingPro.current.style.width = clickX + "px";
+      let clickX = e.changedTouches[0].pageX - progressLeft;
+      controlMusicProgress(progressW, clickX);
+      playingPro.current.style.width = clickX + "px";
+    };
+
+    let dotOntouchstart = function(e) {
+      e.stopPropagation();
+      window.ontouchmove = function(e) {
+        let mouseX = e.changedTouches[0].pageX;
+        playingProW = mouseX - progressLeft;
+        if (playingProW >= progressW) {
+          playingProW = progressW;
+        }
+        if (playingProW <= 0) {
+          playingProW = 0;
+        }
+        playingPro.current.style.width = playingProW + "px";
       };
-    
-      let dotOntouchstart = function(e) {
-        e.stopPropagation();
-        window.ontouchmove = function(e) {
-          let mouseX = e.changedTouches[0].pageX;
-          playingProW = mouseX - progressLeft;
-          if (playingProW >= progressW) {
-            playingProW = progressW;
-          }
-          if (playingProW <= 0) {
-            playingProW = 0;
-          }
-          playingPro.current.style.width = playingProW + "px";
-        };
-        window.ontouchend = function() {
-          controlMusicProgress(progressW, playingProW);
-          window.ontouchmove = null;
-          window.ontouchend = null;
-        };
+      window.ontouchend = function() {
+        controlMusicProgress(progressW, playingProW);
+        window.ontouchmove = null;
+        window.ontouchend = null;
       };
-
-
-
+    };
 
     progress.current.addEventListener("touchstart", progressOntouchstart);
     dot.current.addEventListener("touchstart", dotOntouchstart);
@@ -55,20 +47,18 @@ const DiscoverProgress = props => {
       progress.current.removeEventListener("touchstart", progressOntouchstart);
       dot.current.removeEventListener("touchstart", dotOntouchstart);
     };
-  },[]);
+  }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     let setProgressWidth = () => {
-        playingPro.current.style.width =
-          proportion * (progress.current.offsetWidth - dot.current.offsetWidth) +
-          "px";
-      };
-  if(proportion!==0){
-    setProgressWidth()
-  }
-
-  })
-
+      playingPro.current.style.width =
+        proportion * (progress.current.offsetWidth - dot.current.offsetWidth) +
+        "px";
+    };
+    if (proportion !== 0) {
+      setProgressWidth();
+    }
+  });
 
   return (
     <div className="discover-progress">
@@ -82,7 +72,7 @@ const DiscoverProgress = props => {
   );
 };
 
-export default DiscoverProgress
+export default DiscoverProgress;
 //  extends Component {
 //   constructor(props) {
 //     super(props);

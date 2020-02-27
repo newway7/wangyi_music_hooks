@@ -49,6 +49,9 @@
 
 使用useEffect()，可能会碰到只想调用componentDidUpdate的情形；这种情况下就需要判断与didMount的区别；属于didmount范畴就返回return;由于useEffect()不返回任何东西，所以不能写成return ''; return null;
 
+组件销毁时，怎么做到类似componentWillUnmount的操作？使用useEffect()返回一个函数，移出监听等，可以做到类似componentWillUnmount的操作。
+
+转发ref：新的api：React.forwardRef((props,ref)=>{})包裹组件就可以接收到传入的ref值，从而可以获得子组件实例对象；
 
 ### 优化
 使用模板字符串给元素添加active样式；避免用三元运算符判断，从而优化了代码；
@@ -64,7 +67,8 @@ location.pathname !=='/search' && songsData.length!==0
 
 ### 没有解决的问题：
 
-组件销毁时，怎么做到类似componentWillUnmount的操作？某些时候是数据还没获取到就需要销毁组件；这样会报错。。。
+
+
 
 
 

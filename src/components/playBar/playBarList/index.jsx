@@ -5,42 +5,44 @@ import './style.scss';
 import { setCurrentMusic, delCurrentMusic, setIndex } from '../../search/searchSongs/store/action';
 import { SET_CURRENT_MUSIC, DEL_CURRENT_MUSIC, SET_INDEX } from '../../../store/actionCreate';
 
-class PlayBarList extends Component {
-    render() {
-        const { 
-                isShowSongList, 
-                handleClickToList, 
-                playList, 
-                currentMusic, 
-                changeCurrentMusic, 
-                changePlayList, 
-                currentIndex 
-              } = this.props;
 
-        return (
-            <div className={ isShowSongList ? "playing-song-list show" : "playing-song-list" }>
-                <div className="mask" onClick={(e) => {handleClickToList(e)}}></div>
-                <div className="playing-list-wrap">
-                    <h3>当前歌曲数：{playList.length}</h3>
-                    <div className="song-list-box">
-                    {
-                        playList.map((item, index) => {
-                            return (
-                                <div className="song-list-item" key={index} onClick={() => changeCurrentMusic(item, index)}>
-                                    {
-                                        item.id === currentMusic.id ? (<p className='active'>{item.singer} - <span className='active'>{item.name}</span></p>) : (<p>{item.singer} - <span>{item.name}</span></p>)
-                                    }
-                                    <div className="delete" onClick={(e) => changePlayList(playList, index, currentIndex, e)}></div>
-                                </div>
-                            );
-                        })
-                    }
-                    </div>
+
+const PlayBarList=(props)=>{
+    const { 
+        isShowSongList, 
+        handleClickToList, 
+        playList, 
+        currentMusic, 
+        changeCurrentMusic, 
+        changePlayList, 
+        currentIndex 
+      } = props;
+
+      return (
+        <div className={ isShowSongList ? "playing-song-list show" : "playing-song-list" }>
+            <div className="mask" onClick={handleClickToList}></div>
+            <div className="playing-list-wrap">
+                <h3>当前歌曲数：{playList.length}</h3>
+                <div className="song-list-box">
+                {
+                    playList.map((item, index) => {
+                        return (
+                            <div className="song-list-item" key={index} onClick={() => changeCurrentMusic(item, index)}>
+                                {
+                                    item.id === currentMusic.id ? (<p className='active'>{item.singer} - <span className='active'>{item.name}</span></p>) : (<p>{item.singer} - <span>{item.name}</span></p>)
+                                }
+                                <div className="delete" onClick={(e) => changePlayList(playList, index, currentIndex, e)}></div>
+                            </div>
+                        );
+                    })
+                }
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
+
 }
+
 
 function mapStateToProps(state) {
     return {

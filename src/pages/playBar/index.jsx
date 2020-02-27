@@ -67,7 +67,7 @@ class playBar extends Component {
         })
     }
     
-    componentWillReceiveProps() {
+    UNSAFE_componentWillReceiveProps() {
         this.setState({
             isListen: true
         });
@@ -98,7 +98,7 @@ class playBar extends Component {
                 handleClickToPause={this.handleClickToPause.bind(this)}
                 handleClickToList={this.handleClickToList.bind(this)}
                 />
-                <PlayBarMusic id={currentMusic.id} musicNode={this.getAudioRef.bind(this)}/>
+                <PlayBarMusic id={currentMusic.id} ref={this.getAudioRef.bind(this)}/>
                 <PlayBarList isShowSongList={this.state.isShowSongList} handleClickToList={this.handleClickToList.bind(this)}/>
                 <Cover 
                 isShowDetail={this.state.isShowDetail}
