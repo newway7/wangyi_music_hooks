@@ -20,9 +20,7 @@ git add .
 
 git commit -m $var
 
-#4.
-
- git remote add origin git@github.com:newway7/wangyi_music_hooks.git
+#4.git remote add origin git@github.com:newway7/wangyi_music_hooks.git
 
 #5.
 
