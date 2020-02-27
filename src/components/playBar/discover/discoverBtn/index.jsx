@@ -1,31 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import './style.scss';
 import { setCurrentMusic, setIndex } from '../../search/searchSongs/store/action';
 import { SET_CURRENT_MUSIC, SET_INDEX } from '../../../store/actionCreate';
 
-
-
-
-const DiscoverBtn =(props)=>{
-    const { isListen, playList, currentIndex, handleClickToList, handleClickToPause, handleClickPre, handleClickNext } = props;
-    return (
-        <div className='discover-btn'>
-            <div className="pre-btn" onClick={() => handleClickPre(currentIndex, playList)}></div>
-            <div className={isListen ? "play-song-btn" : "play-song-btn listen"} onClick={(e) => handleClickToPause(e)}></div>
-            <div className="next-btn" onClick={() => handleClickNext(currentIndex, playList)}></div>
-            <div className="more-btn" onClick={() => handleClickToList()}></div>
-        </div>
-    )
-
-
-
+class DiscoverBtn extends Component {
+    render() {
+        const { isListen, playList, currentIndex, handleClickToList, handleClickToPause, handleClickPre, handleClickNext } = this.props;
+        
+        return (
+            <div className='discover-btn'>
+                <div className="pre-btn" onClick={() => handleClickPre(currentIndex, playList)}></div>
+                <div className={isListen ? "play-song-btn" : "play-song-btn listen"} onClick={(e) => handleClickToPause(e)}></div>
+                <div className="next-btn" onClick={() => handleClickNext(currentIndex, playList)}></div>
+                <div className="more-btn" onClick={() => handleClickToList()}></div>
+            </div>
+        )
+    }
 }
-
-
-
-
 
 function mapStateToProps(state) {
     return {
