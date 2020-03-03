@@ -27,4 +27,4 @@ const PlaylistHeader=(props)=>{
 
 
 
-export default PlaylistHeader;
+export default React.memo(PlaylistHeader);

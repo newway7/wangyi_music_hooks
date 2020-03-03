@@ -5,7 +5,7 @@ import axios                         from "axios";
 import "./style.scss";
 import "swiper/css/swiper.min.css";
 
-const HomeCarousel = props => {
+const HomeCarousel = () => {
   const [banner, setBanner] = useState([]); //轮播图的数组；
 
   const initSwiper = () => {

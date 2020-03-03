@@ -1,28 +1,53 @@
-import React                     from 'react';
-import { withRouter,useHistory } from 'react-router-dom';
+import React from "react";
+import LazyLoad from "react-lazyload";
+import { withRouter} from "react-router-dom";
 
-import './style.scss';
+import "./style.scss";
 
-import { playCountConversion }   from '../../../utils/utils';
+import { playCountConversion } from "../../../utils/utils";
+
+const HomeSongListItem = props => {
+  let { img, name, playCount, id } = props;
+
+  return (
+    <div
+      className="home-song-item"
+      onClick={() => {
+        props.history.push("/playList/" + id);
+      }}
+    >
+      <img src={img + "?param=200y200"} alt="" />
+      <p>{name}</p>
+      <div className="headset-icon">{playCountConversion(playCount)}</div>
+    </div>
+  );
+};
+
+const HomeSongListItemWithRouter = withRouter(HomeSongListItem);
+
 
 const HomeSongList=(props)=>{
-    let history=useHistory();
-    let {songList}=props
+    let {songList}=props;
     return (
-        <div className='home-song-list clearfix'>
-            {songList.map((item, index) => {
-                return (
-                    <div className="home-song-item" key={index} onClick={() =>history.push('/playList/' + item.id)}>
-                        <img src={item.picUrl + '?param=200y200'} alt=""/>
-                        <p>{item.name}</p>
-                        <div className="headset-icon">{playCountConversion(item.playCount)}</div>
-                    </div>
-                );
-            })}
-            
+        <div className="home-song-list clearfix">
+          {songList.map((item, index) => {
+            return (
+              <LazyLoad once offset={100} key={index}>
+                <HomeSongListItemWithRouter
+                  img={item.picUrl}
+                  name={item.name}
+                  key={index}
+                  playCount={item.playCount}
+                  id={item.id}
+                />
+              </LazyLoad>
+            );
+          })}
         </div>
-    );
+      );
 }
 
 
-export default withRouter(HomeSongList);
+
+
+export default React.memo(HomeSongList);

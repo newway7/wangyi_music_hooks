@@ -72,7 +72,7 @@ const DiscoverProgress = props => {
   );
 };
 
-export default DiscoverProgress;
+export default React.memo(DiscoverProgress);
 //  extends Component {
 //   constructor(props) {
 //     super(props);

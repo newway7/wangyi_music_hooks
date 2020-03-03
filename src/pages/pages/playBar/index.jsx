@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component,useRef } from 'react'
 import { connect } from 'react-redux';
 
 import PlayBarBtn from '../../components/playBar/playBarBtn/index';
@@ -10,8 +10,154 @@ import './style.scss';
 import { timeConversion } from '../../utils/utils';
 import { SET_CURRENT_MUSIC, SET_INDEX } from '../../store/actionCreate';
 import { setCurrentMusic,setIndex } from '../../components/search/searchSongs/store/action';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
-class playBar extends Component {
+// const PlayBar=(props)=>{
+// let {autoChangeCurrentMusic,playList,index,currentMusic,showPlayer}=props;
+
+
+// let [stateData,setStateData]=useState({
+//     isListen: false,
+//     isShowSongList: false,
+//     isShowDetail: false,
+//     time: '00:00',
+//     endTime: '00:00',
+//     proportion: 0
+// })
+
+
+// let timer=null;//定时器；
+
+
+
+// function handleClickToShowDetail() {
+
+//     setStateData({
+//         ...stateData,
+//         isShowDetail: !stateData.isShowDetail
+//     })
+// }
+
+// async function  handleClickToPause(e) {
+//     e.stopPropagation();
+//     await     setStateData({
+//         ...stateData,
+//         isListen: !stateData.isListen
+//     })
+ 
+//  stateData.isListen ? musicNode.play() : musicNode.pause();
+    
+// }
+
+// function handleClickToList(e) {
+//     e.stopPropagation();
+
+//     setStateData({
+//         ...stateData,
+//         isShowSongList: !stateData.isShowSongList
+//     })
+
+// }
+
+
+// let getAudioRef=useRef(null);
+// let musicNode=getAudioRef.current;
+// function judgeMusicIsEnding() {
+//    autoChangeCurrentMusic(playList, index);
+// }
+
+// function controlMusicProgress(progressW, playingProW) {
+//     let timeProportion = playingProW / progressW;
+//     musicNode.currentTime = currentMusic.duration * timeProportion;//赋值操作；
+// }
+
+// function calculateCurrentTime(time, proportion) {
+//     setStateData({
+//         ...stateData,
+//         time,
+//         proportion
+//     })
+
+// }
+
+
+
+// useEffect(()=>{
+//     setStateData({
+//         ...stateData,
+//         isListen: true
+//     })
+//     console.log('UNSAFE_componentWillReceiveProps')
+    
+// },[currentMusic])//当前音乐变了，说明props变化，把这个设计成取代UNSAFE_componentWillReceiveProps的功能；
+
+
+// useEffect(()=>{
+//     if(musicNode){
+//         musicNode.onended = () => {
+//             autoChangeCurrentMusic(playList, index);
+//         }
+     
+//         timer = setInterval(() => {
+//             let proportion = musicNode.currentTime / currentMusic.duration;//获得进度；
+//             calculateCurrentTime(timeConversion(musicNode.currentTime), proportion);
+//         }, 1000)
+//     }
+
+// return ()=>{
+//     clearInterval(timer)
+// }
+// })
+
+
+
+
+
+
+//     if (!showPlayer) {
+//         return '';
+//     }
+//     return (
+//         <div className='play-bar'>
+//             <PlayBarBtn 
+//             currentMusic={currentMusic} 
+//             songStatus={stateData}
+//             handleClickToShowDetail={handleClickToShowDetail}
+//             handleClickToPause={handleClickToPause}
+//             handleClickToList={handleClickToList}
+//             />
+//             <PlayBarMusic id={currentMusic.id} ref={getAudioRef}/>
+//             <PlayBarList isShowSongList={stateData.isShowSongList} handleClickToList={handleClickToList}/>
+//             <Cover 
+//             isShowDetail={stateData.isShowDetail}
+//             isListen={stateData.isListen}
+//             currentMusic={currentMusic}
+//             time={stateData.time}
+//             proportion={stateData.proportion}
+//             handleClickToShowDetail={handleClickToShowDetail}
+//             handleClickToPause={handleClickToPause}
+//             controlMusicProgress={controlMusicProgress}
+//             />
+//         </div>
+//     )
+
+
+
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+class PlayBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -67,7 +213,7 @@ class playBar extends Component {
         })
     }
     
-    componentWillReceiveProps() {
+    UNSAFE_componentWillReceiveProps() {
         this.setState({
             isListen: true
         });
@@ -115,6 +261,15 @@ class playBar extends Component {
     }
 }
 
+
+
+
+
+
+
+
+
+
 function mapStateToProps(state) {
     return {
         playList: state.songs.playList,
@@ -142,4 +297,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(playBar);
+export default connect(mapStateToProps, mapDispatchToProps)(PlayBar);

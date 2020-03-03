@@ -23,4 +23,4 @@ const DiscoverContent=(props)=>{
 
 
 
-export default  DiscoverContent ;
+export default  React.memo(DiscoverContent) ;

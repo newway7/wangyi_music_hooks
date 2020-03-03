@@ -25,4 +25,4 @@ const SearchHotWord=(props)=>{
 
 
 
-export default SearchHotWord;
+export default React.memo(SearchHotWord);

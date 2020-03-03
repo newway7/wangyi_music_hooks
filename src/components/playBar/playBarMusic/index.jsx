@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import './style.scss';
 
+
+
 const PlayBarMusic=React.forwardRef((props,ref)=>{
     let {id}=props;
     return (
@@ -10,10 +12,4 @@ const PlayBarMusic=React.forwardRef((props,ref)=>{
         </div>
     );
 })
-
-
-
-
-
-
-export default  PlayBarMusic; 
+export default PlayBarMusic;

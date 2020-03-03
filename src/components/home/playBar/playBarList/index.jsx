@@ -80,4 +80,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlayBarList);
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(PlayBarList));

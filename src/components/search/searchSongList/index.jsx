@@ -26,4 +26,4 @@ return (
 
 
 
-export default  SearchSongList ;
+export default  React.memo(SearchSongList) ;

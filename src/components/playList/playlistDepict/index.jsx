@@ -41,4 +41,4 @@ const PlaylistDepict=(props)=>{
 
 
 
-export default PlaylistDepict;
+export default React.memo(PlaylistDepict);

@@ -51,4 +51,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DiscoverBtn);
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(DiscoverBtn));

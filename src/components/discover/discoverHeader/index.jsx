@@ -18,4 +18,4 @@ const DiscoverHeader=(props)=>{
 }
 
 
-export default DiscoverHeader;
+export default React.memo(DiscoverHeader);

@@ -66,6 +66,12 @@ location.pathname !=='/search' && songsData.length!==0
 
 
 ### 没有解决的问题：
+ref获取audio组件的属性的赋值有一些bug，总会报错，没有完全调出来；
+
+
+### 关于代码格式；
+
+
 
 
 

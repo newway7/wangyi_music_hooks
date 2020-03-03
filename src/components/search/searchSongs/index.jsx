@@ -75,4 +75,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchSongs);
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(SearchSongs));

@@ -85,4 +85,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlaylistItem);
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(PlaylistItem));

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux';
 
 import './style.scss';
@@ -82,4 +82,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlayBarList);
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(PlayBarList));

@@ -1,9 +1,12 @@
-import React  from 'react'
+import React, { memo } from 'react'
 
 import './style.scss';
 
-const PlayBarBtn=(props)=>{
-    const { currentMusic, songStatus,handleClickToList,handleClickToShowDetail,handleClickToPause } =props;
+const PlayBarBtn=()=>{
+
+    const { currentMusic, songStatus,handleClickToShowDetail, handleClickToList,handleClickToPause} = props;
+
+
     return (
         <div className='play-bar-btn' onClick={handleClickToShowDetail}>
             <img src={currentMusic.image + '?param=100y100'} alt=""/>
@@ -20,4 +23,8 @@ const PlayBarBtn=(props)=>{
 
 }
 
-export default React.memo(PlayBarBtn); 
+export default memo(PlayBarBtn);
+
+
+
+
